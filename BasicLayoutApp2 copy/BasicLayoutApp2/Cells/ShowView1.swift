@@ -19,8 +19,9 @@ class ShowView1: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if passedImage == nil{
-            Shows.image = UIImage(named:("Mean_0"))}else{Shows.image = UIImage(named:("Mean_\(Int.random(in: 0..<6))"))}
+//        if passedImage == nil{
+//            Shows.image = passedImage}else{Shows.image = UIImage(named:("Mean_\(Int.random(in: 0..<6))"))}
+        Shows.image = passedImage
         //self.Shows.image = passedImage
         // Do any additional setup after loading the view.
     }

@@ -22,6 +22,7 @@ class XIBTableViewCell: UITableViewCell {
     
     
     
+    
     func configure(imageStr: String, indexPath: IndexPath){
         self.ImageView.image = UIImage(named: imageStr)
         self.indexPath = indexPath

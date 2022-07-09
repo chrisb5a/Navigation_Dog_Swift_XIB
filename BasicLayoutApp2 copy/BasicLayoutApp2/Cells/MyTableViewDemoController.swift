@@ -11,7 +11,7 @@ class MyTableViewDemoController: UIViewController {
 
     @IBOutlet weak var DemoTableView: UITableView!
     
-    
+    var selectedIndexPath = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,16 +60,25 @@ extension MyTableViewDemoController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 6
     }
     
 
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    NSLog("You selected cell number: \(indexPath.row)!")
-
-
-    self.performSegue(withIdentifier: "ShowView1", sender: self)
-}
+//  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//    NSLog("You selected cell number: \(indexPath.row)!")
+//
+//
+//
+//
+//    self.performSegue(withIdentifier: "ShowView1", sender: self)
+//}
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      NSLog("You selected cell number: \(indexPath.row)!")
+        self.selectedIndexPath = indexPath.row
+        NSLog("Var_str: \(String(describing: selectedIndexPath))!")
+        self.performSegue(withIdentifier: "ShowView1", sender: self)
+  }
 
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)  {
 //
@@ -101,11 +110,18 @@ extension MyTableViewDemoController: UITableViewDataSource, UITableViewDelegate{
         
             
         //cell.configure(imageStr: "Mean_1", indexPath: indexPath)
-        var imgs = "Mean_\(Int.random(in: 0..<6))"
-        cell.configure(imageStr: imgs,indexPath: indexPath)
+        
+        cell.configure(imageStr: "Mean_\(indexPath.row)",indexPath: indexPath)
         
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let ShowView1 = segue.destination as! ShowView1
+        
+        if let passedImage = UIImage(named:"Mean_0"){ShowView1.passedImage = UIImage(named:"Mean_"+(String(describing: selectedIndexPath))) ??  UIImage(named:"Mean_4")!}
+    }
+    
     
      
     
